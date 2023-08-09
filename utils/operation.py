@@ -32,18 +32,15 @@ class Operation:
         if self.account_from == 'нет данных':
             return 'нет данных'
         elif 'Счет' in self.account_from:
-            list_account_to = list(self.account_from)
-            list_account_to[-5:-4] = ['*', '*']
-            return ''.join(list_account_to[0:5] + list_account_to[-6:])
+            return self.hide_account_to()
         else:
             list_account_from = list(self.account_from)
 
             for i in range(5, 11):
                 list_account_from[-i] = '*'
 
-            list_account_from.insert(-4, ' ')
-            list_account_from.insert(-9, ' ')
-            list_account_from.insert(-14, ' ')
+            for i in [-4, -9, -14]:
+                list_account_from.insert(i, ' ')
             return ''.join(list_account_from)
 
     def hide_account_to(self):
